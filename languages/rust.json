@@ -1,0 +1,11 @@
+{
+  "compiler": {
+    "byproduct": [],
+    "command": "rustc",
+    "flags": ["-O"],
+    "output": "*"
+  },
+  "extension": "rs",
+  "interpreter": null,
+  "name": "Rust"
+}

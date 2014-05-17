@@ -1,0 +1,9 @@
+{
+  "compiler": null,
+  "extension": "py",
+  "interpreter": {
+    "command": "python3.4",
+    "flags": ["-O"]
+  },
+  "name": "CPython 3.4"
+}
