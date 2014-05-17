@@ -85,7 +85,7 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>) -> Option<Metric<'l>> {
     }
     // end of block
 
-    let median = summ5.median;
+    let median = if summ5.median < 1.0 { 1.0 } else { summ5.median };
     let noise = summ5.max - summ5.min;
 
     println!("{} ns (+/- {})", median as u64, noise as u64);
