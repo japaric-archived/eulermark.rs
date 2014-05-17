@@ -1,5 +1,5 @@
 use std::io::fs::File;
-use std::io::{Open,Write};
+use std::io::{Truncate,Write};
 
 pub fn read(path: &Path) -> ~str {
     match File::open(path) {
@@ -12,7 +12,7 @@ pub fn read(path: &Path) -> ~str {
 }
 
 pub fn write(path: &Path, string: &str) {
-    match File::open_mode(path, Open, Write) {
+    match File::open_mode(path, Truncate, Write) {
         Err(_) => fail!("couldn't open {}", path.display()),
         Ok(mut file) => if file.write_str(string).is_err() {
             fail!("couldn't write to {}", path.display());
