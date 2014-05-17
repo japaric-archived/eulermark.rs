@@ -1,0 +1,11 @@
+{
+  "compiler": {
+    "byproduct": [],
+    "command": "go",
+    "flags": ["build"],
+    "output": "*"
+  },
+  "extension": "go",
+  "interpreter": null,
+  "name": "Go"
+}
