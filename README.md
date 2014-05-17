@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/japaric/eulermark.rs.svg?branch=master)](https://travis-ci.org/japaric/eulermark.rs)
+
 # Eulermark
 
 ## What's this?
