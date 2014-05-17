@@ -25,7 +25,7 @@ fn main() {
         println!("{}", problem.id());
         let mut metrics: Vec<Metric> = languages.iter().filter_map(|language| {
             Solution::new_opt(language, &problem).and_then(|solution| {
-                print!("> {} ", solution.language().name());
+                print!("> {:<12}", solution.language().name());
 
                 benchmark(&solution)
             })
