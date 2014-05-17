@@ -24,18 +24,17 @@ int benchmark(int iterations, int (*func)(void)) {
   return (end - start) / iterations;
 }
 
+int step_sum(int start, int end, int step) {
+  int s = start / step, e = (end - 1) / step;
+
+  return step * (e * (e + 1) / 2 - s * (s + 1) / 2);
+}
+
 __attribute__((always_inline))
 inline int f() {
-  int i, sum;
+  int s = 0, e = 1000;
 
-  sum = 0;
-  for (i = 0; i <= 1000; i++) {
-    if (i % 3 == 0 || i % 5 == 0) {
-      sum += i;
-    }
-  }
-
-  return sum;
+  return step_sum(s, e, 3) + step_sum(s, e, 5) - step_sum(s, e, 15);
 }
 
 int main(int argc, char *argv[]) {
