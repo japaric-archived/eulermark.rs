@@ -5,13 +5,13 @@
 
 __attribute__((always_inline))
 inline uint64_t f() {
-  uint64_t ans = 0, curr = 1, next = 2, tmp;
+  uint64_t ans = 0, curr = 1, next = 2;
 
   while (curr < 4000000) {
     if (curr % 2 == 0)
       ans += curr;
 
-    tmp = next;
+    uint64_t tmp = next;
     next += curr;
     curr = tmp;
   }
