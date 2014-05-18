@@ -6,7 +6,7 @@ use test::black_box;
 use time::precise_time_ns;
 
 #[inline]
-fn f() -> int {
+fn f() -> u64 {
     // PROBLEM SOLUTION GOES HERE
     0
 }
@@ -16,16 +16,16 @@ fn main() {
         [_] => {
             println!("{}", f());
         },
-        [_, ref iterations] => {
-            let iterations: u64 = from_str(iterations.as_slice()).unwrap();
+        [_, ref iters] => {
+            let iters: u64 = from_str(iters.as_slice()).unwrap();
 
             let start = precise_time_ns();
-            for _ in range(0, iterations) {
+            for _ in range(0, iters) {
                 black_box(f());
             }
             let end = precise_time_ns();
 
-            println!("{}", (end - start) / iterations);
+            println!("{}", end - start);
         },
         _ => unreachable!(),
     }

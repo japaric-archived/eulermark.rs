@@ -5,7 +5,7 @@ import "os"
 import "strconv"
 import "time"
 
-func f() int {
+func f() uint64 {
     // PROBLEM SOLUTION GOES HERE
     return 0
 }
@@ -15,13 +15,13 @@ func main() {
         fmt.Println(f())
     } else if len(os.Args) == 2 {
         iters, _ := strconv.ParseInt(os.Args[1], 10, 64)
+
         start := time.Now()
         for i := int64(0); i < iters; i++ {
             f()
         }
-        elapsed := time.Now().Sub(start)
+        end := time.Now()
 
-        fmt.Println(elapsed.Nanoseconds() / iters)
+        fmt.Println(end.Sub(start).Nanoseconds())
     }
-
 }

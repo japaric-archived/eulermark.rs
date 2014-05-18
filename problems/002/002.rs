@@ -10,12 +10,12 @@ use test::black_box;
 use time::precise_time_ns;
 
 struct Fibonacci {
-    curr: int,
-    next: int,
+    curr: u64,
+    next: u64,
 }
 
-impl Iterator<int> for Fibonacci {
-    fn next(&mut self) -> Option<int> {
+impl Iterator<u64> for Fibonacci {
+    fn next(&mut self) -> Option<u64> {
         let new_next = self.curr + self.next;
         let new_curr = replace(&mut self.next, new_next);
 
@@ -28,7 +28,7 @@ fn fibonacci() -> Fibonacci {
 }
 
 #[inline]
-fn f() -> int {
+fn f() -> u64 {
     fibonacci().take_while(|&x| x < 4_000_000).filter(|x| x.is_even()).sum()
 }
 
@@ -37,16 +37,16 @@ fn main() {
         [_] => {
             println!("{}", f());
         },
-        [_, ref iterations] => {
-            let iterations: u64 = from_str(iterations.as_slice()).unwrap();
+        [_, ref iters] => {
+            let iters: u64 = from_str(iters.as_slice()).unwrap();
 
             let start = precise_time_ns();
-            for _ in range(0, iterations) {
+            for _ in range(0, iters) {
                 black_box(f());
             }
             let end = precise_time_ns();
 
-            println!("{}", (end - start) / iterations);
+            println!("{}", end - start);
         },
         _ => unreachable!(),
     }

@@ -53,14 +53,14 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>) -> Option<Metric<'l>> {
         let loop_start = precise_time_ns();
 
         for sample in samples.mut_iter() {
-            *sample = executable.bench(n) as f64;
+            *sample = executable.bench(n) as f64 / n as f64;
         };
 
         stats::winsorize(samples, WINSORIZE_PCT);
         let summ = stats::Summary::new(samples);
 
         for sample in samples.mut_iter() {
-            *sample = executable.bench(5 * n) as f64;
+            *sample = executable.bench(5 * n) as f64 / (5 * n) as f64;
         };
 
         stats::winsorize(samples, WINSORIZE_PCT);
@@ -85,10 +85,16 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>) -> Option<Metric<'l>> {
     }
     // end of block
 
-    let median = if summ5.median < 1.0 { 1.0 } else { summ5.median };
+    let median = summ5.median;
     let noise = summ5.max - summ5.min;
 
-    println!("{:>9} ns/iter (+/- {})", median as u64, noise as u64);
+    if median < 1.0 {
+        println!("{:>9} ps/iter (+/- {})",
+                 (1000.0 * median) as u64,
+                 (1000.0 * noise) as u64);
+    } else {
+        println!("{:>9} ns/iter (+/- {})", median as u64, noise as u64);
+    }
 
     Some(Metric {
         language: language.name(),

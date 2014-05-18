@@ -5,8 +5,8 @@ import "os"
 import "strconv"
 import "time"
 
-func f() int {
-    ans, curr, next := 0, 1, 2
+func f() uint64 {
+    ans, curr, next := uint64(0), uint64(1), uint64(2)
 
     for curr < 4000000 {
         if curr % 2 == 0 {
@@ -26,13 +26,13 @@ func main() {
         fmt.Println(f())
     } else if len(os.Args) == 2 {
         iters, _ := strconv.ParseInt(os.Args[1], 10, 64)
+
         start := time.Now()
         for i := int64(0); i < iters; i++ {
             f()
         }
-        elapsed := time.Now().Sub(start)
+        end := time.Now()
 
-        fmt.Println(elapsed.Nanoseconds() / iters)
+        fmt.Println(end.Sub(start).Nanoseconds())
     }
-
 }

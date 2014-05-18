@@ -30,9 +30,6 @@ def to_ns(ts):
     return ts.tv_sec * int(1e9) + ts.tv_nsec
 
 
-def ns_per_iter(start, end, iters):
-    return (to_ns(end) - to_ns(start)) // iters
-
 if len(sys.argv) == 1:
     print(f())
 elif len(sys.argv) == 2:
@@ -44,4 +41,4 @@ elif len(sys.argv) == 2:
         f()
     clock_gettime(CLOCK_MONOTONIC, ctypes.pointer(end))
 
-    print(ns_per_iter(start, end, iters))
+    print(to_ns(end) - to_ns(start))
