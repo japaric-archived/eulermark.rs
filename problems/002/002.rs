@@ -2,34 +2,25 @@ extern crate num;
 extern crate test;
 extern crate time;
 
-use num::Integer;
-use std::iter::AdditiveIterator;
-use std::mem::replace;
 use std::os::args;
 use test::black_box;
 use time::precise_time_ns;
 
-struct Fibonacci {
-    curr: u64,
-    next: u64,
-}
-
-impl Iterator<u64> for Fibonacci {
-    fn next(&mut self) -> Option<u64> {
-        let new_next = self.curr + self.next;
-        let new_curr = replace(&mut self.next, new_next);
-
-        Some(replace(&mut self.curr, new_curr))
-    }
-}
-
-fn fibonacci() -> Fibonacci {
-    Fibonacci { curr: 1, next: 2 }
-}
-
 #[inline]
 fn f() -> u64 {
-    fibonacci().take_while(|&x| x < 4_000_000).filter(|x| x.is_even()).sum()
+    let (mut ans, mut curr, mut next) = (0, 1, 2);
+
+    while curr < 4_000_000 {
+        if curr % 2 == 0 {
+            ans += curr;
+        }
+
+        let tmp = next;
+        next += curr;
+        curr = tmp;
+    }
+
+    ans
 }
 
 fn main() {
