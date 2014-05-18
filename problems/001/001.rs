@@ -5,17 +5,17 @@ use std::os::args;
 use test::black_box;
 use time::precise_time_ns;
 
-fn step_sum(start: int, end: int, step: int) -> int {
-    let (s, e) = ((start - 1) / step + 1, (end - 1) / step);
+fn step_sum(end: uint, step: uint) -> uint {
+    let e = (end - 1) / step;
 
-    step * (e * (e + 1) / 2 - s * (s + 1) / 2)
+    step * e * (e + 1) / 2
 }
 
 #[inline]
-fn f() -> int {
-    let (s, e) = (0, 1000);
+fn f() -> uint {
+    let end = 1000;
 
-    step_sum(s, e, 3) + step_sum(s, e, 5) - step_sum(s, e, 15)
+    step_sum(end, 3) + step_sum(end, 5) - step_sum(end, 15)
 }
 
 fn main() {

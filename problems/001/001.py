@@ -1,13 +1,13 @@
-def step_sum(start, end, step):
-    s, e = (start - 1) // step + 1, (end - 1) // step
+def step_sum(end, step):
+    e = (end - 1) // step
 
-    return step * (e * (e + 1) // 2 + s * (s + 1) // 2)
+    return step * e * (e + 1) // 2
 
 
 def f():
-    s, e = int(0), int(1000)
+    end = int(1000)
 
-    return step_sum(s, e, 3) + step_sum(s, e, 5) - step_sum(s, e, 15)
+    return step_sum(end, 3) + step_sum(end, 5) - step_sum(end, 15)
 
 import ctypes
 import sys

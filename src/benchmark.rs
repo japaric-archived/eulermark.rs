@@ -38,7 +38,7 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>) -> Option<Metric<'l>> {
         },
     };
 
-    if executable.test() == read(problem.answer()) {
+    if executable.test() != read(problem.answer()) {
         println!("Incorrect answer");
 
         return None;

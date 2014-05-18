@@ -50,7 +50,7 @@ impl<'f, 'i> Executable<'f, 'i> {
         }
     }
 
-    pub fn test(&self) -> ~str {
+    pub fn test(&self) -> StrBuf {
         let file = self.file;
         let mut command = match self.interpreter {
             None => Command::new(format!("./{}", file.display())),
@@ -70,7 +70,7 @@ impl<'f, 'i> Executable<'f, 'i> {
             Ok(output) => if output.status.success() {
                 match StrBuf::from_utf8(output.output) {
                     Err(_) => fail!("malformed output"),
-                    Ok(string) => string.as_slice().trim().into_owned(),
+                    Ok(string) => string,
                 }
             } else {
                 fail!("{} failed at runtime", file.display())

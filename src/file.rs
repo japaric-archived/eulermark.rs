@@ -1,12 +1,12 @@
 use std::io::fs::File;
 use std::io::{Truncate,Write};
 
-pub fn read(path: &Path) -> ~str {
+pub fn read(path: &Path) -> StrBuf {
     match File::open(path) {
         Err(_) => fail!("failed to open {}", path.display()),
         Ok(mut file) => match file.read_to_str() {
             Err(_) => fail!("failed to read {}", path.display()),
-            Ok(contents) => contents,
+            Ok(contents) => StrBuf::from_owned_str(contents),
         }
     }
 }

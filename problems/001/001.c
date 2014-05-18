@@ -24,17 +24,17 @@ int benchmark(int iterations, int (*func)(void)) {
   return (end - start) / iterations;
 }
 
-int step_sum(int start, int end, int step) {
-  int s = (start - 1) / step + 1, e = (end - 1) / step;
+unsigned int step_sum(unsigned int end, unsigned int step) {
+  unsigned int e = (end - 1) / step;
 
-  return step * (e * (e + 1) / 2 - s * (s + 1) / 2);
+  return step * e * (e + 1) / 2;
 }
 
 __attribute__((always_inline))
-inline int f() {
-  int s = 0, e = 1000;
+inline unsigned int f() {
+  unsigned int end = 1000;
 
-  return step_sum(s, e, 3) + step_sum(s, e, 5) - step_sum(s, e, 15);
+  return step_sum(end, 3) + step_sum(end, 5) - step_sum(end, 15);
 }
 
 int main(int argc, char *argv[]) {

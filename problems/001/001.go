@@ -5,16 +5,16 @@ import "os"
 import "strconv"
 import "time"
 
-func step_sum(start int, end int, step int) int {
-    s, e := (start - 1) / step + 1, (end - 1) / step
+func step_sum(end uint, step uint) uint {
+    e := (end - 1) / step
 
-    return step * (e * (e + 1) / 2 - s * (s + 1) / 2)
+    return step * e * (e + 1) / 2
 }
 
-func f() int {
-    s, e := 0, 1000
+func f() uint {
+    end := uint(1000)
 
-    return step_sum(s, e, 3) + step_sum(s, e, 5) - step_sum(s, e, 15)
+    return step_sum(end, 3) + step_sum(end, 5) - step_sum(end, 15)
 }
 
 func main() {

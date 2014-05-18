@@ -7,7 +7,7 @@ use language::Language;
 use serialize::json;
 
 pub fn parse_language_file(language_file: &Path) -> Language {
-    let mut decoder = match json::from_str(read(language_file)) {
+    let mut decoder = match json::from_str(read(language_file).as_slice()) {
         Err(_) => fail!("{} is invalid json", language_file.display()),
         Ok(json) => json::Decoder::new(json),
     };
