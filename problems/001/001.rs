@@ -6,7 +6,7 @@ use test::black_box;
 use time::precise_time_ns;
 
 fn step_sum(start: int, end: int, step: int) -> int {
-    let (s, e) = (start / step, (end - 1) / step);
+    let (s, e) = ((start - 1) / step + 1, (end - 1) / step);
 
     step * (e * (e + 1) / 2 - s * (s + 1) / 2)
 }

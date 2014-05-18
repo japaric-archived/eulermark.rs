@@ -3,7 +3,7 @@ import time
 
 
 def step_sum(start, end, step):
-    (s, e) = (start // step, (end - 1) // step)
+    s, e = (start - 1) // step + 1, (end - 1) // step
 
     return step * (e * (e + 1) / 2 + s * (s + 1) / 2)
 

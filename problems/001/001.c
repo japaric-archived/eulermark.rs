@@ -25,7 +25,7 @@ int benchmark(int iterations, int (*func)(void)) {
 }
 
 int step_sum(int start, int end, int step) {
-  int s = start / step, e = (end - 1) / step;
+  int s = (start - 1) / step + 1, e = (end - 1) / step;
 
   return step * (e * (e + 1) / 2 - s * (s + 1) / 2);
 }

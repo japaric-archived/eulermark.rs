@@ -6,8 +6,7 @@ import "strconv"
 import "time"
 
 func step_sum(start int, end int, step int) int {
-    s := start / step
-    e := (end - 1) / step
+    s, e := (start - 1) / step + 1, (end - 1) / step
 
     return step * (e * (e + 1) / 2 - s * (s + 1) / 2)
 }
