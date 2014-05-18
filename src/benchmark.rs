@@ -13,8 +13,9 @@ static WINSORIZE_PCT: f64 = 5.0;
 #[deriving(Encodable)]
 pub struct Metric<'a> {
     language: &'a str,
+    max: f64,
     median: f64,
-    noise: f64,
+    min: f64,
 }
 
 impl<'l> Metric<'l> {
@@ -85,8 +86,10 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>) -> Option<Metric<'l>> {
     }
     // end of block
 
+    let max = summ5.max;
     let median = summ5.median;
-    let noise = summ5.max - summ5.min;
+    let min = summ5.min;
+    let noise = max - min;
 
     if median < 1.0 {
         println!("{:>9} ps/iter (+/- {})",
@@ -98,7 +101,8 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>) -> Option<Metric<'l>> {
 
     Some(Metric {
         language: language.name(),
+        max: max,
         median: median,
-        noise: noise,
+        min: min,
     })
 }
