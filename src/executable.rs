@@ -83,7 +83,7 @@ impl<'f, 'i> Executable<'f, 'i> {
             } else {
                 println!("Runtime failure");
 
-                println!("{}", StrBuf::from_utf8(output.error));
+                println!("{}", StrBuf::from_utf8(output.error).unwrap());
 
                 None
             },
