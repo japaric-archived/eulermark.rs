@@ -1,0 +1,9 @@
+{
+  "compiler": null,
+  "extension": "py",
+  "interpreter": {
+    "command": "pypy",
+    "flags": ["-O"]
+  },
+  "name": "Pypy"
+}
