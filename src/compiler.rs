@@ -12,22 +12,33 @@ pub struct Compiler {
 }
 
 impl Compiler {
-    pub fn compile(&self, source: &Path) -> CompilerOutput {
+    pub fn compile(&self, source: &Path) -> Option<CompilerOutput> {
         let command = self.command.as_slice();
         let flags = self.flags.as_slice();
         let output_file = match source.with_extension("").filename_str() {
-            None => fail!("{} seems to be malformed", source.display()),
+            None => {
+                println!("Malformed input file");
+
+                return None;
+            },
             Some(filename) => str::replace(self.output.as_slice(),
                                            "*",
                                            filename)
         };
 
         match Command::new(command).args(flags).arg(source).output() {
-            Err(_) => fail!("couldn't find {}", command),
+            Err(_) => {
+                println!("Couldn't find the compiler");
+
+                None
+            },
             Ok(output) => if output.status.success() {
-                CompilerOutput::new(output_file)
+                Some(CompilerOutput::new(output_file))
             } else {
-                fail!("failed to compile {}", source.display())
+                println!("Compiler error");
+                print!("{}", StrBuf::from_utf8(output.error).unwrap());
+
+                None
             },
         }
     }

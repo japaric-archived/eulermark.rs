@@ -55,11 +55,14 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
             return None;
         }
     }
-    hashes.insert(name, new_hash);
 
-    let compiler_output = language.compiler().map(|compiler| {
-        compiler.compile(file)
-    });
+    let compiler_output = match language.compiler() {
+        None => None,
+        Some(compiler) => match compiler.compile(file) {
+            None => return None,
+            output => output,
+        }
+    };
 
     let executable = match compiler_output {
         None => Executable::new(file, language.interpreter()),
@@ -127,6 +130,8 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
     } else {
         println!("{:>9} ns/iter (+/- {})", median as u64, noise as u64);
     }
+
+    hashes.insert(name, new_hash);
 
     Some(Metric {
         language: StrBuf::from_str(language.name()),
