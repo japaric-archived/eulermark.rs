@@ -86,8 +86,8 @@ pub fn update_metrics(id: &str, mut new_metrics: Vec<Metric>) {
             (Some(old), Some(new)) => {
                 match old.language().cmp(&new.language()) {
                     Less => {
-                        metrics.push(old);
-                        new_metrics.push(new);
+                        metrics.push(new);
+                        old_metrics.push(old);
                     },
                     Equal => {
                         let diff = (new.median() / old.median() - 1.0) * 100.0;
@@ -105,8 +105,8 @@ pub fn update_metrics(id: &str, mut new_metrics: Vec<Metric>) {
                         metrics.push(new);
                     },
                     Greater => {
-                        metrics.push(new);
-                        old_metrics.push(old);
+                        metrics.push(old);
+                        new_metrics.push(new);
                     },
                 }
             }
