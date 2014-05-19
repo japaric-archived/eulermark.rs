@@ -1,0 +1,9 @@
+{
+  "compiler": null,
+  "extension": "rb",
+  "interpreter": {
+    "command": "ruby",
+    "flags": []
+  },
+  "name": "Ruby"
+}
