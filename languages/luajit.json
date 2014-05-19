@@ -1,0 +1,9 @@
+{
+  "compiler": null,
+  "extension": "lua",
+  "interpreter": {
+      "command": "luajit",
+      "flags": []
+  },
+  "name": "LuaJIT"
+}
