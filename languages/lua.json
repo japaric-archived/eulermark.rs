@@ -1,0 +1,14 @@
+{
+  "compiler": {
+    "byproduct": [],
+    "command": "luac",
+    "flags": [],
+    "output": "luac.out"
+  },
+  "extension": "lua",
+  "interpreter": {
+      "command": "lua",
+      "flags": []
+  },
+  "name": "Lua"
+}
