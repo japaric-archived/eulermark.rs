@@ -50,7 +50,7 @@ impl<'f, 'i> Executable<'f, 'i> {
         }
     }
 
-    pub fn test(&self) -> StrBuf {
+    pub fn test(&self) -> Option<StrBuf> {
         let file = self.file;
         let mut command = match self.interpreter {
             None => Command::new(format!("./{}", file.display())),
@@ -66,14 +66,26 @@ impl<'f, 'i> Executable<'f, 'i> {
         };
 
         match output {
-            Err(_) => fail!("couldn't find {}", command),
+            Err(_) => {
+                println!("Couldn't find the interpreter");
+
+                None
+            },
             Ok(output) => if output.status.success() {
                 match StrBuf::from_utf8(output.output) {
-                    Err(_) => fail!("malformed output"),
-                    Ok(string) => string,
+                    Err(_) => {
+                        println!("Bad output");
+
+                        None
+                    },
+                    Ok(string) => Some(string),
                 }
             } else {
-                fail!("{} failed at runtime", file.display())
+                println!("Runtime failure");
+
+                println!("{}", StrBuf::from_utf8(output.error));
+
+                None
             },
         }
     }

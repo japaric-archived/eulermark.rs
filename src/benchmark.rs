@@ -71,10 +71,14 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
         },
     };
 
-    if executable.test() != read(problem.answer()) {
-        println!("Incorrect answer");
+    let answer = read(problem.answer());
+    match executable.test() {
+        None => return None,
+        Some(output) => if output != answer {
+            println!("Incorrect answer");
 
-        return None;
+            return None;
+        }
     }
 
     // this block implements the algorithm used for the Rust bencher framework
