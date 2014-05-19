@@ -2,7 +2,7 @@
   "compiler": {
     "byproduct": [],
     "command": "gcc",
-    "flags": ["-O2"],
+    "flags": ["-O2", "-fdiagnostics-color"],
     "output": "a.out"
   },
   "extension": "c",
