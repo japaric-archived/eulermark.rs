@@ -9,12 +9,13 @@ all:
 	$(RUSTC) --out-dir bin
 
 bench:
+	cd template && npm install posix-clock
 	mkdir -p hashes
 	mkdir -p metrics
 	bin/eulermark
 
 clean:
-	rm -rf {bin,metrics}
+	rm -rf {bin,hashes,metrics,template/node_modules}
 
 test:
 	$(foreach src,$(srcs),$(RUSTC_NT) $(src) || exit;)

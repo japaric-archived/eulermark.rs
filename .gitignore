@@ -1,3 +1,4 @@
 bin/*
 hashes/*
 metrics/*
+template/node_modules/*
