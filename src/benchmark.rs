@@ -1,7 +1,9 @@
 use executable::Executable;
 use file::read;
+use hash::Hashes;
 use solution::Solution;
 use std::cmp::max;
+use std::hash;
 use test::stats;
 use time::precise_time_ns;
 
@@ -10,30 +12,57 @@ static MIN_BENCH_TIME: u64 = 100_000_000;
 static NSAMPLES: uint = 50;
 static WINSORIZE_PCT: f64 = 5.0;
 
-#[deriving(Encodable)]
+#[deriving(Decodable,Encodable)]
 pub struct Metric<'a> {
-    language: &'a str,
+    language: StrBuf,
     max: f64,
     median: f64,
     min: f64,
 }
 
 impl<'l> Metric<'l> {
+    pub fn language<'a>(&'a self) -> &'a str {
+        self.language.as_slice()
+    }
+
     pub fn median(&self) -> f64 {
         self.median
     }
+
+    pub fn min(&self) -> f64 {
+        self.min
+    }
+
+    pub fn max(&self) -> f64 {
+        self.max
+    }
 }
 
-pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>) -> Option<Metric<'l>> {
+pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
+    -> Option<Metric<'l>>
+{
     let language = solution.language();
     let problem = solution.problem();
+    let file = solution.file();
+    let new_hash = StrBuf::from_owned_str(hash::hash(&read(file)).to_str());
+    let name = StrBuf::from_str(language.name());
+
+    match hashes.find(&name) {
+        None => {},
+        Some(old_hash) => if new_hash.as_slice() == old_hash.as_slice() {
+            println!("File unchanged, skipping");
+
+            return None;
+        }
+    }
+    hashes.insert(name, new_hash);
 
     let compiler_output = language.compiler().map(|compiler| {
-        compiler.compile(solution.file())
+        compiler.compile(file)
     });
 
     let executable = match compiler_output {
-        None => Executable::new(solution.file(), language.interpreter()),
+        None => Executable::new(file, language.interpreter()),
         Some(ref output) => {
             Executable::new(output.binary(), language.interpreter())
         },
@@ -100,7 +129,7 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>) -> Option<Metric<'l>> {
     }
 
     Some(Metric {
-        language: language.name(),
+        language: StrBuf::from_str(language.name()),
         max: max,
         median: median,
         min: min,

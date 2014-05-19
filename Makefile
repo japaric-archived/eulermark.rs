@@ -9,6 +9,7 @@ all:
 	$(RUSTC) --out-dir bin
 
 bench:
+	mkdir -p hashes
 	mkdir -p metrics
 	bin/eulermark
 

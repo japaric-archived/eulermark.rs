@@ -1,9 +1,12 @@
+#![feature(default_type_params)]
+
+extern crate collections;
 extern crate serialize;
 extern crate test;
 extern crate time;
 
 use benchmark::{Metric,benchmark};
-use json::save_metrics;
+use json::{load_hashes,save_hashes,update_metrics};
 use language::supported_languages;
 use problem::Problem;
 use solution::Solution;
@@ -12,6 +15,7 @@ mod benchmark;
 mod compiler;
 mod executable;
 mod file;
+mod hash;
 mod interpreter;
 mod json;
 mod language;
@@ -22,22 +26,19 @@ fn main() {
     let languages = supported_languages();
 
     for problem in range(1u, 1000).filter_map(|i| Problem::new_opt(i)) {
-        println!("{}", problem.id());
-        let mut metrics: Vec<Metric> = languages.iter().filter_map(|language| {
-            Solution::new_opt(language, &problem).and_then(|solution| {
-                print!("> {:<12}", solution.language().name());
+        let pid = problem.id();
+        let mut hashes = load_hashes(pid);
 
-                benchmark(&solution)
+        println!("{}", pid);
+        let metrics: Vec<Metric> = languages.iter().filter_map(|language| {
+            Solution::new_opt(language, &problem).and_then(|solution| {
+                print!("> {:<13}", solution.language().name());
+
+                benchmark(&solution, &mut hashes)
             })
         }).collect();
 
-        metrics.sort_by(|&a, &b| {
-            let a = a.median() as u64;
-            let b = b.median() as u64;
-
-            a.cmp(&b)
-        });
-
-        save_metrics(problem.id(), &metrics);
+        save_hashes(pid, &hashes);
+        update_metrics(pid, metrics);
     }
 }
