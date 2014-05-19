@@ -10,6 +10,7 @@ use json::{load_hashes,save_hashes,update_metrics};
 use language::supported_languages;
 use problem::Problem;
 use solution::Solution;
+use std::io::stdio;
 
 mod benchmark;
 mod compiler;
@@ -33,6 +34,7 @@ fn main() {
         let metrics: Vec<Metric> = languages.iter().filter_map(|language| {
             Solution::new_opt(language, &problem).and_then(|solution| {
                 print!("> {:<13}", solution.language().name());
+                stdio::flush();
 
                 benchmark(&solution, &mut hashes)
             })
