@@ -1,5 +1,35 @@
+use std::io::fs;
 use std::io::fs::File;
 use std::io::{Truncate,Write};
+
+pub struct Symlink {
+    dst: Path,
+}
+
+impl Symlink {
+    pub fn new(pid: &str) -> Symlink {
+        let src = Path::new(format!("problems/{0}/{0}.txt", pid));
+        let dst = Path::new(format!("{}.txt", pid));
+
+        match fs::symlink(&src, &dst) {
+            Err(_) => fail!("failed to create symlink"),
+            Ok(_) => {},
+        }
+
+        Symlink {
+            dst: dst,
+        }
+    }
+}
+
+impl Drop for Symlink {
+    fn drop(&mut self) {
+        match fs::unlink(&self.dst) {
+            Err(_) => println!("failed to remove {}", self.dst.display()),
+            Ok(_) => {},
+        }
+    }
+}
 
 pub fn read(path: &Path) -> StrBuf {
     match File::open(path) {

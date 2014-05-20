@@ -6,6 +6,7 @@ extern crate test;
 extern crate time;
 
 use benchmark::{Metric,benchmark};
+use file::Symlink;
 use json::{load_hashes,save_hashes,update_metrics};
 use language::supported_languages;
 use problem::Problem;
@@ -29,6 +30,8 @@ fn main() {
     for problem in range(1u, 1000).filter_map(|i| Problem::new_opt(i)) {
         let pid = problem.id();
         let mut hashes = load_hashes(pid);
+
+        let _symlink = Symlink::new(pid);
 
         println!("{}", pid);
         let metrics: Vec<Metric> = languages.iter().filter_map(|language| {
