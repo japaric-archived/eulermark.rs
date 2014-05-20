@@ -41,16 +41,17 @@ impl Iterator<u64> for Eratostenes {
     }
 }
 
-fn eratostenes() -> Eratostenes {
+fn eratostenes(capacity: uint) -> Eratostenes {
     Eratostenes {
         count: 1,
-        map: HashMap::new(),
+        map: HashMap::with_capacity(capacity),
     }
 }
 
 #[inline]
 fn f() -> u64 {
-    eratostenes().nth(10000).unwrap()
+    let target = 10000;
+    eratostenes(target).nth(target).unwrap()
 }
 
 fn main() {
