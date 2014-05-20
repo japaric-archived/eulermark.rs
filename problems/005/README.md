@@ -1,3 +1,3 @@
 # [Smallest multiple](https://projecteuler.net/problem=5)
 
-![](/../master/plots/005.png?raw=true)
+![](https://raw.githubusercontent.com/japaric/eulermark.rs/master/plots/005.png)

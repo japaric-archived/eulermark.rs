@@ -1,3 +1,3 @@
 # [10001st prime](https://projecteuler.net/problem=7)
 
-![](/../master/plots/007.png?raw=true)
+![](https://raw.githubusercontent.com/japaric/eulermark.rs/master/plots/007.png)

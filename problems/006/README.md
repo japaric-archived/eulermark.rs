@@ -1,3 +1,3 @@
 # [Sum square difference](https://projecteuler.net/problem=6)
 
-![](/../master/plots/006.png?raw=true)
+![](https://raw.githubusercontent.com/japaric/eulermark.rs/master/plots/006.png)
