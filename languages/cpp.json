@@ -1,0 +1,11 @@
+{
+  "compiler": {
+    "byproduct": [],
+    "command": "g++",
+    "flags": ["-O2", "-fdiagnostics-color", "-std=c++11"],
+    "output": "a.out"
+  },
+  "extension": "cpp",
+  "interpreter": null,
+  "name": "C++"
+}
