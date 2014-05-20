@@ -1,21 +1,14 @@
 extern crate test;
 extern crate time;
 
+use std::iter::AdditiveIterator;
 use std::os::args;
 use test::black_box;
 use time::precise_time_ns;
 
-fn step_sum(end: u64, step: u64) -> u64 {
-    let e = (end - 1) / step;
-
-    step * e * (e + 1) / 2
-}
-
 #[inline]
 fn f() -> u64 {
-    let end = 1000;
-
-    step_sum(end, 3) + step_sum(end, 5) - step_sum(end, 15)
+    range(0u64, 1000).filter(|x| x % 3 == 0 || x % 5 == 0).sum()
 }
 
 fn main() {

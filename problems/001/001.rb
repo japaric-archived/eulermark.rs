@@ -1,13 +1,11 @@
-def step_sum(end_, step)
-  e = (end_ - 1) / step
-
-  step * e * (e + 1) / 2
-end
-
 def f
-  end_ = 1000
+  ans = 0
 
-  step_sum(end_, 3) + step_sum(end_, 5) - step_sum(end_, 15)
+  (0..999).each do |i|
+    ans += i if i % 3 == 0 || i % 5 == 0
+  end
+
+  ans
 end
 
 case ARGV.length

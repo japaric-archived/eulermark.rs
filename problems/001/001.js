@@ -1,13 +1,14 @@
-function stepSum(end, step) {
-    var e = ((end - 1) / step) | 0;
-
-    return step * e * (e + 1) / 2;
-}
-
 function f() {
-    var end = 1000;
+    var ans = 0;
+    var i;
 
-    return stepSum(end, 3) + stepSum(end, 5) - stepSum(end, 15);
+    for (i = 0; i < 1000; i++) {
+        if (i % 3 === 0 || i % 5 === 0) {
+            ans += i;
+        }
+    }
+
+    return ans;
 }
 
 function toNs(ts) {

@@ -1,13 +1,11 @@
-def step_sum(end, step):
-    e = (end - 1) // step
-
-    return step * e * (e + 1) // 2
-
-
 def f():
-    end = int(1000)
+    ans = 0
 
-    return step_sum(end, 3) + step_sum(end, 5) - step_sum(end, 15)
+    for i in range(0, 1000):
+        if i % 3 == 0 or i % 5 == 0:
+            ans += i
+
+    return ans
 
 import ctypes
 import sys

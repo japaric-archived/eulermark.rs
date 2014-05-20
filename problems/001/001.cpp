@@ -5,17 +5,15 @@
 
 using namespace std;
 
-uint64_t stepSum(uint64_t end, uint64_t step) {
-  uint64_t e = (end - 1) / step;
-
-  return step * e * (e + 1) / 2;
-}
-
 __attribute__((always_inline))
 inline uint64_t f() {
-  uint64_t end = 1000;
+  uint64_t ans = 0;
 
-  return stepSum(end, 3) + stepSum(end, 5) - stepSum(end, 15);
+  for (uint64_t i = 0; i < 1000; i++)
+    if (i % 3 == 0 || i % 5 == 0)
+      ans += i;
+
+  return ans;
 }
 
 uint64_t toNs(timespec &ts) {

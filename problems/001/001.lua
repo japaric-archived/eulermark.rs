@@ -1,15 +1,15 @@
 posix = require "posix"
 
-local function stepSum(end_, step)
-    local e = math.floor((end_ - 1) / step)
-
-    return step * e * (e + 1) / 2
-end
-
 local function f()
-    local end_ = 1000
+    local ans = 0
 
-    return stepSum(end_, 3) + stepSum(end_, 5) - stepSum(end_, 15)
+    for i = 0,999 do
+        if i % 3 == 0 or i % 5 == 0 then
+            ans = ans + i
+        end
+    end
+
+    return ans
 end
 
 function toNs(ts)

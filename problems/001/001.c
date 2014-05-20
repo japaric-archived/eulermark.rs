@@ -3,17 +3,16 @@
 #include <stdlib.h>
 #include <time.h>
 
-uint64_t step_sum(uint64_t end, uint64_t step) {
-  uint64_t e = (end - 1) / step;
-
-  return step * e * (e + 1) / 2;
-}
-
 __attribute__((always_inline))
 inline uint64_t f() {
-  uint64_t end = 1000;
+  uint64_t ans = 0;
+  uint64_t i;
 
-  return step_sum(end, 3) + step_sum(end, 5) - step_sum(end, 15);
+  for (i = 0; i < 1000; i++)
+    if (i % 3 == 0 || i % 5 == 0)
+      ans += i;
+
+  return ans;
 }
 
 int64_t to_ns(struct timespec ts) {
