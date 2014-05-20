@@ -7,8 +7,9 @@ use std::hash;
 use test::stats;
 use time::precise_time_ns;
 
-static MAX_BENCH_TIME: u64 = 3_000_000_000;
-static MIN_BENCH_TIME: u64 = 100_000_000;
+static INITIAL_BENCHMARK_PERIOD: u64 = 50_000_000;
+static MAX_BENCH_TIME: u64 = 10_000_000_000;
+static MIN_BENCH_TIME: u64 = 2_000_000_000;
 static NSAMPLES: uint = 50;
 static WINSORIZE_PCT: f64 = 5.0;
 
@@ -82,7 +83,7 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
     }
 
     // this block implements the algorithm used for the Rust bencher framework
-    let mut n = max(1_000_000 / max(executable.bench(1), 1), 1);
+    let mut n = max(INITIAL_BENCHMARK_PERIOD / max(executable.bench(1), 1), 1);
     let mut samples = [0.0, ..NSAMPLES];
     let mut summ5;
     let mut total_run = 0;
