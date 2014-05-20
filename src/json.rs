@@ -92,11 +92,11 @@ pub fn update_metrics(id: &str, mut new_metrics: Vec<Metric>) {
                     Equal => {
                         let diff = (new.median() / old.median() - 1.0) * 100.0;
 
-                        if new.min() > old.max() {
+                        if new.lower() > old.upper() {
                             println!("* {} regressed by {:.2}%",
                                      new.language(),
                                      diff)
-                        } else if new.max() < old.min() {
+                        } else if new.upper() < old.lower() {
                             println!("* {} improved by {:.2}%",
                                      new.language(),
                                      -diff)

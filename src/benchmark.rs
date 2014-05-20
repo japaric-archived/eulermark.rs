@@ -16,9 +16,9 @@ static WINSORIZE_PCT: f64 = 5.0;
 #[deriving(Decodable,Encodable)]
 pub struct Metric<'a> {
     language: StrBuf,
-    max: f64,
+    lower: f64,
     median: f64,
-    min: f64,
+    upper: f64,
 }
 
 impl<'l> Metric<'l> {
@@ -30,12 +30,12 @@ impl<'l> Metric<'l> {
         self.median
     }
 
-    pub fn min(&self) -> f64 {
-        self.min
+    pub fn lower(&self) -> f64 {
+        self.lower
     }
 
-    pub fn max(&self) -> f64 {
-        self.max
+    pub fn upper(&self) -> f64 {
+        self.upper
     }
 }
 
@@ -123,10 +123,10 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
     }
     // end of block
 
-    let max = summ5.max;
+    let upper = summ5.max;
     let median = summ5.median;
-    let min = summ5.min;
-    let noise = max - min;
+    let lower = summ5.min;
+    let noise = upper - lower;
 
     if median < 1.0 {
         println!("{:>9} ps/iter (+/- {})",
@@ -140,8 +140,8 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
 
     Some(Metric {
         language: StrBuf::from_str(language.name()),
-        max: max,
+        upper: upper,
         median: median,
-        min: min,
+        lower: lower,
     })
 }
