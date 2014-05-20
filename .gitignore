@@ -1,4 +1,5 @@
 bin/*
 hashes/*
 metrics/*
+stage/*
 template/node_modules/*

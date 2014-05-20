@@ -1,8 +1,8 @@
 RUSTC = rustc -O src/eulermark.rs
-RUSTC_NT = rustc $(QUIET) --no-trans
+RUSTC_NT = rustc --no-trans
 srcs = $(wildcard problems/*/*.rs)
 
-.PHONY: all bench clean test
+.PHONY: all bench book clean plot test
 
 all:
 	mkdir -p bin
@@ -14,8 +14,14 @@ bench:
 	mkdir -p metrics
 	bin/eulermark
 
+book:
+	./build-book.sh
+
 clean:
-	rm -rf {bin,hashes,metrics,template/node_modules}
+	rm -rf {bin,hashes,metrics,plots,stage,template/node_modules}
+
+plot:
+	./plot.py
 
 test:
 	$(foreach src,$(srcs),$(RUSTC_NT) $(src) || exit;)
