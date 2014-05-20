@@ -1,4 +1,5 @@
 bin/*
 hashes/*
 metrics/*
+plots/*
 template/node_modules/*
