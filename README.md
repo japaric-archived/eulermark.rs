@@ -1,3 +1,4 @@
+![](https://projecteuler.net/profile/japaric.png)
 [![Build Status](https://travis-ci.org/japaric/eulermark.rs.svg?branch=master)](https://travis-ci.org/japaric/eulermark.rs)
 
 # Eulermark
