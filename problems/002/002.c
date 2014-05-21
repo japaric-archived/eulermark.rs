@@ -25,7 +25,7 @@ int64_t to_ns(struct timespec ts) {
 
 int main(int argc, char *argv[]) {
   if (argc == 1) {
-    printf("%d\n", f());
+    printf("%lu\n", f());
   } else if (argc == 2) {
     struct timespec start = {0, 0}, end = {0, 0};
     uint64_t i = 0;
