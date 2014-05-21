@@ -7,7 +7,7 @@ use test::black_box;
 use time::precise_time_ns;
 
 static LIMIT: u64 = 2000000;
-static SIZE: u64 = (LIMIT - 3) / 2 + 1;
+static SIZE: u64 = (LIMIT - 1) / 2;
 
 #[inline]
 fn f() -> u64 {

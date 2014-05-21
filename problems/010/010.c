@@ -5,7 +5,7 @@
 #include <time.h>
 
 #define LIMIT 2000000
-#define SIZE ((LIMIT - 3) / 2 + 1)
+#define SIZE (LIMIT - 1) / 2
 
 __attribute__((always_inline))
 inline uint64_t f() {
