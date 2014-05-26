@@ -6,9 +6,9 @@ use json::{parse_language_file};
 #[deriving(Decodable)]
 pub struct Language {
     compiler: Option<Compiler>,
-    extension: StrBuf,
+    extension: String,
     interpreter: Option<Interpreter>,
-    name: StrBuf,
+    name: String,
 }
 
 impl Language {

@@ -1,7 +1,7 @@
 pub struct Problem {
     answer: Path,
     directory: Path,
-    id: ~str,
+    id: String,
 }
 
 impl Problem {

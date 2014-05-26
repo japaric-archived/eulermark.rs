@@ -37,7 +37,7 @@ impl<'f, 'i> Executable<'f, 'i> {
         match output {
             Err(_) => fail!("couldn't find {}", command),
             Ok(output) => if output.status.success() {
-                match StrBuf::from_utf8(output.output) {
+                match String::from_utf8(output.output) {
                     Err(_) => fail!("malformed output"),
                     Ok(string) => match from_str(string.as_slice().trim()) {
                         None => fail!("malformed output"),
@@ -50,7 +50,7 @@ impl<'f, 'i> Executable<'f, 'i> {
         }
     }
 
-    pub fn test(&self) -> Option<StrBuf> {
+    pub fn test(&self) -> Option<String> {
         let file = self.file;
         let mut command = match self.interpreter {
             None => Command::new(format!("./{}", file.display())),
@@ -72,7 +72,7 @@ impl<'f, 'i> Executable<'f, 'i> {
                 None
             },
             Ok(output) => if output.status.success() {
-                match StrBuf::from_utf8(output.output) {
+                match String::from_utf8(output.output) {
                     Err(_) => {
                         println!("Bad output");
 
@@ -83,7 +83,7 @@ impl<'f, 'i> Executable<'f, 'i> {
             } else {
                 println!("Runtime failure");
 
-                println!("{}", StrBuf::from_utf8(output.error).unwrap());
+                println!("{}", String::from_utf8(output.error).unwrap());
 
                 None
             },

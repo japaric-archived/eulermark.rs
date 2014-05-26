@@ -5,10 +5,10 @@ use std::str;
 
 #[deriving(Decodable)]
 pub struct Compiler {
-    byproduct: Vec<StrBuf>,
-    command: StrBuf,
-    flags: Vec<StrBuf>,
-    output: StrBuf,
+    byproduct: Vec<String>,
+    command: String,
+    flags: Vec<String>,
+    output: String,
 }
 
 impl Compiler {
@@ -36,7 +36,7 @@ impl Compiler {
                 Some(CompilerOutput::new(output_file))
             } else {
                 println!("Compiler error");
-                print!("{}", StrBuf::from_utf8(output.error).unwrap());
+                print!("{}", String::from_utf8(output.error).unwrap());
 
                 None
             },

@@ -31,12 +31,12 @@ impl Drop for Symlink {
     }
 }
 
-pub fn read(path: &Path) -> StrBuf {
+pub fn read(path: &Path) -> String {
     match File::open(path) {
         Err(_) => fail!("failed to open {}", path.display()),
         Ok(mut file) => match file.read_to_str() {
             Err(_) => fail!("failed to read {}", path.display()),
-            Ok(contents) => StrBuf::from_owned_str(contents),
+            Ok(contents) => contents,
         }
     }
 }

@@ -15,7 +15,7 @@ static WINSORIZE_PCT: f64 = 5.0;
 
 #[deriving(Decodable,Encodable)]
 pub struct Metric<'a> {
-    language: StrBuf,
+    language: String,
     lower: f64,
     median: f64,
     upper: f64,
@@ -45,8 +45,8 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
     let language = solution.language();
     let problem = solution.problem();
     let file = solution.file();
-    let new_hash = StrBuf::from_owned_str(hash::hash(&read(file)).to_str());
-    let name = StrBuf::from_str(language.name());
+    let new_hash = hash::hash(&read(file)).to_str();
+    let name = String::from_str(language.name());
 
     match hashes.find(&name) {
         None => {},
@@ -136,10 +136,10 @@ pub fn benchmark<'l, 'p>(solution: &Solution<'l, 'p>, hashes: &mut Hashes)
         println!("{:>9} ns/iter (+/- {})", median as u64, noise as u64);
     }
 
-    hashes.insert(name, new_hash);
+    hashes.insert(name.clone(), new_hash);
 
     Some(Metric {
-        language: StrBuf::from_str(language.name()),
+        language: name,
         upper: upper,
         median: median,
         lower: lower,

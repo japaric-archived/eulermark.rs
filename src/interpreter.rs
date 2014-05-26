@@ -1,7 +1,7 @@
 #[deriving(Decodable)]
 pub struct Interpreter {
-    command: StrBuf,
-    flags: Vec<StrBuf>,
+    command: String,
+    flags: Vec<String>,
 }
 
 impl Interpreter {
@@ -9,7 +9,7 @@ impl Interpreter {
         self.command.as_slice()
     }
 
-    pub fn flags<'a>(&'a self) -> &'a [StrBuf] {
+    pub fn flags<'a>(&'a self) -> &'a [String] {
         self.flags.as_slice()
     }
 }
