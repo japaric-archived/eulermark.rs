@@ -21,7 +21,9 @@ fn f() -> u64 {
         }
     };
 
-    for digit in contents.chars().filter_map(|chr| to_digit(chr, 10)) {
+    for digit in contents.as_slice().chars().filter_map(|chr| {
+        to_digit(chr, 10)
+    }) {
         factors[pos] = digit as u8;
 
         let prod = factors.iter().fold(1, |p, &f| p * f as u64);

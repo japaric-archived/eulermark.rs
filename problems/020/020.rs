@@ -15,7 +15,10 @@ fn factorial(n: uint) -> BigUint {
 
 #[inline]
 fn f() -> uint {
-    factorial(100).to_str().chars().filter_map(|c| c.to_digit(10)).sum()
+    factorial(100).to_str().as_slice()
+                  .chars()
+                  .filter_map(|c| c.to_digit(10))
+                  .sum()
 }
 
 fn main() {

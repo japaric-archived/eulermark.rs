@@ -22,7 +22,7 @@ fn f() -> u64 {
 
     let mut grid: Vec<u64> = Vec::with_capacity((SIZE * SIZE) as uint);
 
-    for word in contents.words() {
+    for word in contents.as_slice().words() {
         match from_str(word) {
             None => {},
             Some(number) => grid.push(number),

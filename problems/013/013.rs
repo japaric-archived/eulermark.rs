@@ -10,7 +10,7 @@ use test::black_box;
 use time::precise_time_ns;
 
 #[inline]
-fn f() -> ~str {
+fn f() -> String {
     let content = match File::open(&Path::new("013.txt")) {
         Err(_) => fail!("couldn't open input file"),
         Ok(mut file) => match file.read_to_str() {
@@ -19,12 +19,12 @@ fn f() -> ~str {
         }
     };
 
-    let sum = content.lines()
+    let sum = content.as_slice().lines()
                      .filter_map(|line| from_str::<BigInt>(line.trim()))
                      .sum()
                      .to_str();
 
-    sum.slice(0, 10).to_owned()
+    sum.as_slice().slice(0, 10).to_owned()
 }
 
 fn main() {

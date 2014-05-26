@@ -12,7 +12,7 @@ use time::precise_time_ns;
 
 #[inline]
 fn f() -> uint {
-    pow(2u.to_biguint().unwrap(), 1000).to_str()
+    pow(2u.to_biguint().unwrap(), 1000).to_str().as_slice()
                                        .chars()
                                        .filter_map(|c| to_digit(c, 10))
                                        .sum()

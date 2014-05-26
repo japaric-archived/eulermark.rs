@@ -18,7 +18,7 @@ fn f() -> uint {
     };
 
     let costs =
-        content.lines()
+        content.as_slice().lines()
                .map(|l| l.words().filter_map(from_str).collect::<Vec<uint>>())
                .fold(vec!(0), |a, b| {
                    let a = a.as_slice();

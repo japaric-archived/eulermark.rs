@@ -23,7 +23,7 @@ fn f() -> u64 {
         }
     };
 
-    let mut names: Vec<&str> = content.split(',')
+    let mut names: Vec<&str> = content.as_slice().split(',')
                                       .map(|s| s.trim_chars('"'))
                                       .collect();
 
