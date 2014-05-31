@@ -5,7 +5,7 @@ use std::os::args;
 use test::black_box;
 use time::precise_time_ns;
 
-#[deriving(Eq,FromPrimitive)]
+#[deriving(FromPrimitive,PartialEq,TotalEq)]
 enum Day {
     Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday,
 }
