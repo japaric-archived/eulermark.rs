@@ -24,7 +24,7 @@ fn f() -> String {
                      .sum()
                      .to_str();
 
-    sum.as_slice().slice(0, 10).to_owned()
+    sum.as_slice().slice(0, 10).to_string()
 }
 
 fn main() {
