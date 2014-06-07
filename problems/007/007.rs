@@ -2,9 +2,8 @@
 
 extern crate test;
 extern crate time;
-extern crate collections;
 
-use collections::HashMap;
+use std::collections::HashMap;
 use std::hash::sip::SipHasher;
 use std::os::args;
 use test::black_box;
