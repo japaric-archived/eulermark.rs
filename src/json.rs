@@ -1,12 +1,12 @@
 extern crate serialize;
 
 use benchmark::Metric;
-use collections::HashMap;
 use file::{read,write};
 use hash::Hashes;
 use language::Language;
 use serialize::Decodable;
 use serialize::json;
+use std::collections::HashMap;
 
 pub fn parse_language_file(language_file: &Path) -> Language {
     let mut decoder = match json::from_str(read(language_file).as_slice()) {

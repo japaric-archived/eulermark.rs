@@ -1,4 +1,4 @@
-use collections::HashMap;
+use std::collections::HashMap;
 use std::hash::sip::SipHasher;
 
 #[deriving(Decodable)]
