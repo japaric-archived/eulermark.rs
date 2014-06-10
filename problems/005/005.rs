@@ -2,14 +2,14 @@ extern crate num;
 extern crate test;
 extern crate time;
 
-use num::lcm;
+use num::integer;
 use std::os::args;
 use test::black_box;
 use time::precise_time_ns;
 
 #[inline]
 fn f() -> u64 {
-    range(2u64, 21).fold(1, |a, b| lcm(a, b))
+    range(2u64, 21).fold(1, |a, b| integer::lcm(a, b))
 }
 
 fn main() {
