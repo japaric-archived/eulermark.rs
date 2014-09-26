@@ -1,3 +1,11 @@
+**Note** This project has been deprecated in favor of
+[`euler_criterion.rs`](https://github.com/japaric/euler_criterion.rs), which
+uses [`criterion.rs`](https://github.com/japaric/criterion.rs) to perform a
+more thoughtful analysis of the benchmark results. Please don't open issues or
+send PRs here, because this repository won't receive further updates.
+
+---
+
 ![](https://projecteuler.net/profile/japaric.png)
 [![Build Status](https://travis-ci.org/japaric/eulermark.rs.svg?branch=master)](https://travis-ci.org/japaric/eulermark.rs)
 
